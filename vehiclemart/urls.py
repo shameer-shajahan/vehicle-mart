@@ -16,7 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from store import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('vehicle_add/',views.VehicleCreateView.as_view(),name="vehicle_add"),
+    path('vehicle_list/',views.VehicleListView.as_view(),name="vehicle_list"),
+    path('vehicle/<int:pk>/',views.VehicleDetailView.as_view(),name="vehicle_detail"),
+    path('vehicle/<int:pk>/remove/',views.VehicleDeleteView.as_view(),name="vehicle_delete"),
+    path('vehicle/<int:pk>/change/',views.VehicleUpdateView.as_view(),name="vehicle_update")
 ]

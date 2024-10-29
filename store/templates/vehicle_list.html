@@ -1,0 +1,55 @@
+{%extends 'base.html'%}
+
+
+
+{%block main_block%}
+
+<h2> vehicle list</h2>
+
+<div class="container">
+  <div>
+    <form class="d-flex" role="search" action="{%url 'vehicle_list'%}">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="filter"
+        list="records">
+      <datalist id="records">
+
+        {%for r in records%}
+
+        <option value="{{r}}"></option>
+
+        {%endfor%}
+
+      </datalist>
+
+
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+
+
+  </div>
+  <div class="row">
+    {%for v in data%}
+    <div class="col-3 mb-3">
+      <div class="card" style="width: 100%;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Name : {{v.name}}</h5>
+          <p class="card-text">Description : {{v.description}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">varient : {{v.varient}}</li>
+          <li class="list-group-item">Fuel : {{v.fuel_type}}</li>
+          <li class="list-group-item">Running KM : {{v.running_km}}</li>
+        </ul>
+        <div class="card-body">
+          <a href="{%url 'vehicle_detail' v.id%}" class="card-link">View</a>
+          <a href="{%url 'vehicle_delete' v.id%}" class="card-link">Delete</a>
+          <a href="{%url 'vehicle_update' v.id%}">Update</a>
+        </div>
+      </div>
+    </div>
+    {%endfor%}
+  </div>
+</div>
+
+{%endblock%}

@@ -39,3 +39,4 @@ class Vehicle(models.Model):
         return self.name
 
 
+    picture=models.ImageField(upload_to="vehicle_image",null=True)
