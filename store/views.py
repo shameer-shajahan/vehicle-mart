@@ -26,7 +26,7 @@ class VehicleCreateView(View):
 
         form_data=request.POST
 
-        form_instance=self.class_name(form_data)
+        form_instance=self.class_name(form_data,files=request.FILES)
 
         if form_instance.is_valid():
 
@@ -155,7 +155,7 @@ class VehicleUpdateView(View):
 
         form_data=request.POST
 
-        form_instance=self.class_name(form_data)
+        form_instance=self.class_name(form_data,files=request.FILES)
 
         if form_instance.is_valid():
 

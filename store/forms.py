@@ -23,3 +23,14 @@ class VehicleForm(forms.Form):
     brand=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control"}))
 
     owner_type=forms.ChoiceField(choices=Vehicle.owner_options,widget=forms.Select(attrs={"class":"form-contol" "form-select"}))
+
+    picture=forms.ImageField()
+
+
+class vehicleUpdateForm(forms.ModelForm):
+
+    class Meta:
+
+        model=Vehicle
+
+        fields="__all__"

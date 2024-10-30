@@ -4,12 +4,13 @@
 
 {%block main_block%}
 
-<h2> vehicle list</h2>
 
 <div class="container">
+  <h2 class="mt-3"> vehicle list</h2>
+
   <div>
-    <form class="d-flex" role="search" action="{%url 'vehicle_list'%}">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="filter"
+    <form class="d-flex mb-3" role="search" action="{%url 'vehicle_list'%}">
+      <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search" name="filter"
         list="records">
       <datalist id="records">
 
@@ -31,7 +32,9 @@
     {%for v in data%}
     <div class="col-3 mb-3">
       <div class="card" style="width: 100%;">
-        <img src="..." class="card-img-top" alt="...">
+        {%if v.picture%}
+        <img src="{{v.picture.url}}" class="card-img-top" alt="...">
+        {%endif%}
         <div class="card-body">
           <h5 class="card-title">Name : {{v.name}}</h5>
           <p class="card-text">Description : {{v.description}}</p>

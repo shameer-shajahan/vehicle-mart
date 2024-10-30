@@ -2,9 +2,21 @@
 
 {%block main_block%}
 <body></body>
-    {{data.name}}
-    {{data.price}}
-    {{data.description}}
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <img src="{{data.picture.url}}" class="card-img-top" alt="...">
+        </div>
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+    </div>
+    <div>{{data.name}}</div>
+    <div>{{data.price}}</div>
+    <div>{{data.description}}</div>
+    <div>{{data.varient}}</div>
+    <div>{{data.color}}</div>
+
+</div>
 </body>
 
 {%endblock%}
