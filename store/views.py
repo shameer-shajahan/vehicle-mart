@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 
 from django.views.generic import View
 
-from store.forms import VehicleForm
+from store.forms import VehicleForm,VehicleUpdateForm
 
 from store.models import Vehicle
 
@@ -110,59 +110,98 @@ class VehicleDeleteView(View):
 
         return redirect("vehicle_list")
 
+# class VehicleUpdateView(View):
+
+#     template_name="vehicle_update.html"
+
+#     class_name=VehicleForm
+
+#     def get(self,request,*args,**kwargs):
+
+#         id=kwargs.get("pk")
+
+#         Vehicle_objects=Vehicle.objects.get(id=id)
+
+#         data={
+
+#                "name":Vehicle_objects.name,
+
+#                 "varient":Vehicle_objects.varient,
+
+#                 "description":Vehicle_objects.description,
+
+#                 "fuel_type":Vehicle_objects.fuel_type,
+
+#                 "running_km":Vehicle_objects.running_km,
+
+#                 "color":Vehicle_objects.color,
+
+#                 "price":Vehicle_objects.price,
+
+#                 "brand":Vehicle_objects.brand,
+
+#                 "owner_type":Vehicle_objects.owner_type
+
+#         }
+
+#         form_instance=self.class_name(initial=data)
+
+#         return render(request,self.template_name,{"forms":form_instance})
+    
+    
+#     def post(self,request,*args,**kwargs):
+
+#         id=kwargs.get("pk")
+
+#         form_data=request.POST
+
+#         form_instance=self.class_name(form_data,files=request.FILES)
+
+#         if form_instance.is_valid():
+
+#             data=form_instance.cleaned_data
+            
+#             Vehicle.objects.filter(id=id).update(**data)
+
+#             return redirect("vehicle_list")
+        
+#         return render(request,self.template_name,{"forms":form_instance})
+    
 class VehicleUpdateView(View):
 
     template_name="vehicle_update.html"
 
-    class_name=VehicleForm
+    form_class=VehicleUpdateForm
 
     def get(self,request,*args,**kwargs):
 
         id=kwargs.get("pk")
 
-        Vehicle_objects=Vehicle.objects.get(id=id)
+        vehicle_object=get_object_or_404(Vehicle,id=id)
 
-        data={
+        form_instance=self.form_class(instance=vehicle_object)
 
-               "name":Vehicle_objects.name,
-
-                "varient":Vehicle_objects.varient,
-
-                "description":Vehicle_objects.description,
-
-                "fuel_type":Vehicle_objects.fuel_type,
-
-                "running_km":Vehicle_objects.running_km,
-
-                "color":Vehicle_objects.color,
-
-                "price":Vehicle_objects.price,
-
-                "brand":Vehicle_objects.brand,
-
-                "owner_type":Vehicle_objects.owner_type
-
-        }
-
-        form_instance=self.class_name(initial=data)
-
-        return render(request,self.template_name,{"forms":form_instance})
-    
+        return render (request,self.template_name,{"forms":form_instance})
     
     def post(self,request,*args,**kwargs):
 
         id=kwargs.get("pk")
 
+        vehicle_object=get_object_or_404(Vehicle,id=id)
+
         form_data=request.POST
 
-        form_instance=self.class_name(form_data,files=request.FILES)
+        form_instance=self.form_class(form_data,files=request.FILES,instance=vehicle_object)
 
         if form_instance.is_valid():
 
-            data=form_instance.cleaned_data
-            
-            Vehicle.objects.filter(id=id).update(**data)
+            form_instance.save()
 
             return redirect("vehicle_list")
         
         return render(request,self.template_name,{"forms":form_instance})
+
+            
+
+
+        

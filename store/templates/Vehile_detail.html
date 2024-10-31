@@ -3,20 +3,28 @@
 {%block main_block%}
 <body></body>
 <div class="container">
-    <div class="row">
-        <div class="col-4">
-            <img src="{{data.picture.url}}" class="card-img-top" alt="...">
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{data.picture.url}}" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{data.name}}</h5>
+              <p class="card-text">{{data.price}}</p>
+              <p class="card-text">{{data.varient}}</p>
+              <p class="card-text"><small class="text-body-secondary">{{data.description}}</small></p>
+              <div>{{data.color}}</div>
+            </div>
+          </div>
         </div>
-        <div class="col-4"></div>
-        <div class="col-4"></div>
-    </div>
-    <div>{{data.name}}</div>
-    <div>{{data.price}}</div>
-    <div>{{data.description}}</div>
-    <div>{{data.varient}}</div>
-    <div>{{data.color}}</div>
+      </div>
 
 </div>
 </body>
 
 {%endblock%}
+
+
+
+

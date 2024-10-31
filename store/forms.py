@@ -27,10 +27,35 @@ class VehicleForm(forms.Form):
     picture=forms.ImageField()
 
 
-class vehicleUpdateForm(forms.ModelForm):
+class VehicleUpdateForm(forms.ModelForm):
 
     class Meta:
 
         model=Vehicle
 
         fields="__all__"
+
+        widgets={
+            
+            "name":forms.TextInput(attrs={"class":"form-control"}),
+
+            "varient":forms.TextInput(attrs={"class":"form-control"}),
+
+            "description":forms.Textarea(attrs={"class":"form-control","rows":5}),
+
+            "fuel_type":forms.Select(attrs={"class":"form-control"}),
+
+            "running_km":forms.NumberInput(attrs={"class":"form-control"}),
+            
+            "color":forms.TextInput(attrs={"class":"form-control"}),
+            
+            "price":forms.NumberInput(attrs={"class":"form-control"}),
+            
+            "brand":forms.TextInput(attrs={"class":"form-control"}),
+            
+            "owner_type":forms.Select(attrs={"class":"form-control"}),
+            
+            "picture":forms.FileInput(attrs={"class":"form-control"})
+            
+    
+        }
